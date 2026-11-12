@@ -1,11 +1,1808 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ANDREA SANZ | Mujer - Nueva Colección</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f4f4f4;
+      --text: #000000;
+      --text-muted: #767676;
+      --border: #e5e5e5;
+      --accent: #000000;
+      --accent-hover: #222222;
+      --badge-new: #000000;
+      --badge-promo: #d90429;
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+    }
+
+    body {
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* TOP ANNOUNCEMENT BAR */
+    .top-bar {
+      background-color: #000;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 8px 16px;
+      position: relative;
+      z-index: 1001;
+    }
+
+    /* HEADER / NAVBAR */
+    .header {
+      position: fixed;
+      top: 30px;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 1000;
+      transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease, top 0.3s ease;
+      color: #fff;
+    }
+
+    .header.scrolled {
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      color: #000;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .header-right {
+      justify-content: flex-end;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: opacity 0.2s;
+    }
+
+    .nav-btn:hover {
+      opacity: 0.65;
+    }
+
+    .brand-logo {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .icon-badge-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background-color: currentColor;
+      font-size: 9px;
+      font-weight: 800;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header:not(.scrolled) .badge-count {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .header.scrolled .badge-count {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 620px;
+      overflow: hidden;
+      background-color: #111;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-media img {
+      object-position: center 20%;
+      filter: brightness(0.76);
+      transform: scale(1.02);
+      animation: slowZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.0); }
+      to { transform: scale(1.07); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.05) 45%, rgba(0,0,0,0.65) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px 32px;
+      color: #fff;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 6.5vw, 84px);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      max-width: 850px;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      max-width: 460px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      background-color: #fff;
+      color: #000;
+      padding: 14px 32px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: var(--transition);
+      border: 1px solid #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: #fff;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #fff;
+      padding: 14px 32px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(255,255,255,0.7);
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      background-color: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    /* CATEGORY PILLS STRIP */
+    .category-strip {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      background: #fff;
+      position: sticky;
+      top: 64px;
+      z-index: 900;
+    }
+
+    .category-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-pill {
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      transition: var(--transition);
+      background: #fff;
+    }
+
+    .cat-pill:hover, .cat-pill.active {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    /* BENTO LOOKBOOK EDITORIAL GRID */
+    .editorial-section {
+      padding: 40px 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .section-link {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+
+    .bento-card {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--bg-alt);
+      cursor: pointer;
+    }
+
+    .bento-card img {
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .bento-large {
+      grid-column: span 6;
+      height: 620px;
+    }
+
+    .bento-medium {
+      grid-column: span 3;
+      height: 620px;
+    }
+
+    .bento-info {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 45%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: #fff;
+    }
+
+    .bento-info span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .bento-info h3 {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    /* PRODUCT CATALOG */
+    .catalog-section {
+      padding: 32px 24px 72px;
+    }
+
+    .catalog-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .product-count {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .sort-select {
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-family: inherit;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px 12px;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-img-wrap {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      background-color: var(--bg-alt);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .product-img-wrap img {
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: var(--badge-new);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      z-index: 2;
+    }
+
+    .product-badge.promo {
+      background-color: var(--badge-promo);
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: var(--transition);
+    }
+
+    .wishlist-btn:hover {
+      background: #fff;
+      transform: scale(1.08);
+    }
+
+    .wishlist-btn.active svg {
+      fill: #000;
+    }
+
+    /* Quick size selector on hover */
+    .quick-sizes {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(6px);
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.28s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 3;
+    }
+
+    .product-img-wrap:hover .quick-sizes {
+      transform: translateY(0);
+    }
+
+    .quick-sizes-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .size-options {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .size-btn {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .size-btn:hover {
+      border-color: #000;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .product-name {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .product-name:hover {
+      text-decoration: underline;
+    }
+
+    .product-price {
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .product-colors {
+      display: flex;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .color-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+
+    /* CAMPAIGN BANNER */
+    .campaign-banner {
+      margin: 0 24px 64px;
+      background-color: #000;
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 440px;
+    }
+
+    .campaign-content {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .campaign-content span {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .campaign-content h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.02;
+      margin-bottom: 16px;
+    }
+
+    .campaign-content p {
+      font-size: 14px;
+      color: #ccc;
+      max-width: 400px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* NEWSLETTER & FOOTER */
+    .newsletter {
+      border-top: 1px solid var(--border);
+      padding: 64px 24px;
+      text-align: center;
+      background-color: var(--bg-alt);
+    }
+
+    .newsletter h3 {
+      font-size: 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .newsletter p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 440px;
+      margin: 0 auto;
+      border-bottom: 1px solid #000;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 12px 4px;
+      font-size: 13px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .newsletter-form button {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 12px 16px;
+    }
+
+    .footer {
+      padding: 56px 24px 32px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col li a {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-col li a:hover {
+      color: #000;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* DRAWERS & MODALS */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      z-index: 1600;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-left {
+      left: 0;
+      transform: translateX(-100%);
+    }
+
+    .drawer-left.open {
+      transform: translateX(0);
+    }
+
+    .drawer-right {
+      right: 0;
+      transform: translateX(100%);
+    }
+
+    .drawer-right.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h3 {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    /* Menu Drawer Links */
+    .menu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .menu-list a {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-list a:hover {
+      opacity: 0.6;
+    }
+
+    /* Cart Drawer Items */
+    .shipping-bar {
+      background: var(--bg-alt);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .progress-track {
+      height: 3px;
+      background: #ddd;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #000;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 14px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item img {
+      width: 72px;
+      height: 96px;
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cart-item-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .cart-item-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .cart-item-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+    }
+
+    .qty-controls button {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .qty-controls span {
+      padding: 0 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .drawer-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      padding: 15px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: background 0.2s;
+    }
+
+    .checkout-btn:hover {
+      background: #222;
+    }
+
+    /* SEARCH OVERLAY */
+    .search-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      z-index: 1700;
+      padding: 32px 24px 48px;
+      transform: translateY(-100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-modal.open {
+      transform: translateY(0);
+    }
+
+    .search-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .search-input-wrap input {
+      flex: 1;
+      border: none;
+      font-size: clamp(18px, 3vw, 28px);
+      font-weight: 700;
+      outline: none;
+      font-family: inherit;
+      text-transform: uppercase;
+    }
+
+    .trending-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .trending-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      background: var(--bg-alt);
+    }
+
+    .trending-tag:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    /* QUICK VIEW MODAL */
+    .modal-center {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%) scale(0.96);
+      background: #fff;
+      z-index: 1750;
+      width: 92%;
+      max-width: 820px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+
+    .modal-center.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .modal-img {
+      aspect-ratio: 3/4;
+      background: var(--bg-alt);
+    }
+
+    .modal-details {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 20px;
+      font-weight: 600;
+      padding: 4px 8px;
+    }
+
+    .modal-sizes {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0 24px;
+    }
+
+    .modal-size-pill {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-size-pill.selected, .modal-size-pill:hover {
+      border-color: #000;
+      background: #000;
+      color: #fff;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #000;
+      color: #fff;
+      padding: 14px 22px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      z-index: 2000;
+      transform: translateY(120%);
+      transition: transform 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .bento-large {
+        grid-column: span 12;
+        height: 480px;
+      }
+      .bento-medium {
+        grid-column: span 6;
+        height: 440px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 16px;
+      }
+      .nav-text {
+        display: none;
+      }
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 8px;
+      }
+      .campaign-banner {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .modal-center {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .modal-img {
+        height: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Hola mundo</h1>
+
+  <!-- TOP PROMO BAR -->
+  <div class="top-bar">
+    ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 49,99 € &nbsp;|&nbsp; NUEVA COLECCIÓN MUJER FW
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="mainHeader">
+    <div class="header-left">
+      <button class="nav-btn" id="openMenuBtn" aria-label="Menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="17" x2="15" y2="17"></line>
+        </svg>
+        <span class="nav-text">Menú</span>
+      </button>
+      <button class="nav-btn" id="openSearchBtn" aria-label="Buscar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="nav-text">Buscar</span>
+      </button>
+    </div>
+
+    <a href="#" class="brand-logo">ANDREA SANZ</a>
+
+    <div class="header-right">
+      <button class="nav-btn" id="wishlistHeaderBtn" aria-label="Favoritos">
+        <div class="icon-badge-wrapper">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge-count" id="wishCount">0</span>
+        </div>
+      </button>
+
+      <button class="nav-btn" id="openCartBtn" aria-label="Cesta">
+        <div class="icon-badge-wrapper">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="badge-count" id="cartCount">0</span>
+        </div>
+        <span class="nav-text">Cesta</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO EDITORIAL -->
+  <section class="hero">
+    <div class="hero-media">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1920&q=85" alt="Andrea Sanz Mujer Nueva Colección">
+    </div>
+    <div class="hero-overlay">
+      <span class="hero-tag">ANDREA SANZ STUDIO / MUJER</span>
+      <h1 class="hero-title">URBAN<br>ARCHIVE 26</h1>
+      <p class="hero-subtitle">Siluetas oversize, cuero efecto desgastado y denim arquitectónico diseñado para dominar la calle.</p>
+      <div class="hero-actions">
+        <a href="#catalogo" class="btn-primary">Ver Colección</a>
+        <a href="#lookbook" class="btn-outline">Explorar Lookbook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY PILLS -->
+  <nav class="category-strip" id="categoryStrip">
+    <button class="cat-pill active" data-category="all">Ver Todo</button>
+    <button class="cat-pill" data-category="abrigos">Abrigos y Cazadoras</button>
+    <button class="cat-pill" data-category="denim">Denim & Jeans</button>
+    <button class="cat-pill" data-category="tops">Tops & Camisetas</button>
+    <button class="cat-pill" data-category="vestidos">Vestidos</button>
+    <button class="cat-pill" data-category="calzado">Calzado & Botas</button>
+  </nav>
+
+  <!-- EDITORIAL LOOKBOOK GRID -->
+  <section class="editorial-section" id="lookbook">
+    <div class="section-header">
+      <h2 class="section-title">Tendencias Mujer</h2>
+      <a href="#catalogo" class="section-link">Comprar el look</a>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-card bento-large" onclick="filterByCategory('abrigos')">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=80" alt="Outerwear Drop">
+        <div class="bento-info">
+          <span>NEW DROP</span>
+          <h3>OUTERWEAR & LEATHER</h3>
+        </div>
+      </div>
+      <div class="bento-card bento-medium" onclick="filterByCategory('denim')">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Baggy Denim">
+        <div class="bento-info">
+          <span>DENIM LAB</span>
+          <h3>BAGGY & CARGO</h3>
+        </div>
+      </div>
+      <div class="bento-card bento-medium" onclick="filterByCategory('vestidos')">
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80" alt="Night Out">
+        <div class="bento-info">
+          <span>PARTY EDIT</span>
+          <h3>NIGHT SILHOUETTES</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT CATALOG -->
+  <section class="catalog-section" id="catalogo">
+    <div class="section-header">
+      <h2 class="section-title" id="catalogHeading">Novedades Mujer</h2>
+    </div>
+
+    <div class="catalog-toolbar">
+      <span class="product-count" id="productCount">Mostrando 8 artículos</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="featured">Ordenar: Destacados</option>
+        <option value="price-asc">Precio: Menor a Mayor</option>
+        <option value="price-desc">Precio: Mayor a Menor</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- Renderizado dinámico con JS -->
+    </div>
+  </section>
+
+  <!-- CAMPAIGN BANNER -->
+  <section class="campaign-banner">
+    <div class="campaign-content">
+      <span>ANDREA SANZ MEMBERS</span>
+      <h2>ÚNETE AL CLUB Y CONSIGUE UN 10% DTO.</h2>
+      <p>Acceso anticipado a lanzamientos limitados, envíos express gratuitos y experiencias exclusivas de moda urbana.</p>
+      <a href="#newsletter" class="btn-primary">Registrarme Gratis</a>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80" alt="Andrea Sanz Editorial">
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="newsletter">
+    <h3>SUSCRÍBETE A ANDREA SANZ</h3>
+    <p>Recibe las últimas novedades, editoriales y ofertas directamente en tu correo.</p>
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" placeholder="Introduce tu e-mail" required>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Comprar online</a></li>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="#">Guía de tallas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Andrea Sanz</h4>
+        <ul>
+          <li><a href="#">Sobre la marca</a></li>
+          <li><a href="#">Sostenibilidad</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+          <li><a href="#">Localizador de tiendas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Colección Mujer</h4>
+        <ul>
+          <li><a href="#catalogo" onclick="filterByCategory('abrigos')">Abrigos y Cazadoras</a></li>
+          <li><a href="#catalogo" onclick="filterByCategory('denim')">Jeans Baggy</a></li>
+          <li><a href="#catalogo" onclick="filterByCategory('vestidos')">Vestidos</a></li>
+          <li><a href="#catalogo" onclick="filterByCategory('calzado')">Botas y Plataformas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Síguenos</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ANDREA SANZ. TODOS LOS DERECHOS RESERVADOS.</span>
+      <span>ESPAÑA | ESPAÑOL (€)</span>
+    </div>
+  </footer>
+
+  <!-- BACKDROP -->
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- LEFT NAVIGATION DRAWER -->
+  <aside class="drawer drawer-left" id="menuDrawer">
+    <div class="drawer-header">
+      <h3>ANDREA SANZ — MUJER</h3>
+      <button id="closeMenuBtn" aria-label="Cerrar menú">✕</button>
+    </div>
+    <div class="drawer-body">
+      <ul class="menu-list">
+        <li><a href="#catalogo" onclick="filterByCategory('all'); closeAllDrawers();">Novedades <span>→</span></a></li>
+        <li><a href="#catalogo" onclick="filterByCategory('abrigos'); closeAllDrawers();">Abrigos y Cazadoras <span>→</span></a></li>
+        <li><a href="#catalogo" onclick="filterByCategory('denim'); closeAllDrawers();">Denim & Cargo <span>→</span></a></li>
+        <li><a href="#catalogo" onclick="filterByCategory('tops'); closeAllDrawers();">Tops & Bodys <span>→</span></a></li>
+        <li><a href="#catalogo" onclick="filterByCategory('vestidos'); closeAllDrawers();">Vestidos <span>→</span></a></li>
+        <li><a href="#catalogo" onclick="filterByCategory('calzado'); closeAllDrawers();">Calzado <span>→</span></a></li>
+        <li><a href="#lookbook" onclick="closeAllDrawers();">Editorial Lookbook <span>→</span></a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- RIGHT CART DRAWER -->
+  <aside class="drawer drawer-right" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Tu Cesta (<span id="drawerCartCount">0</span>)</h3>
+      <button id="closeCartBtn" aria-label="Cerrar cesta">✕</button>
+    </div>
+    <div class="drawer-body">
+      <div class="shipping-bar">
+        <span id="shippingText">Añade 49,99 € para conseguir envío gratuito</span>
+        <div class="progress-track">
+          <div class="progress-fill" id="shippingProgress"></div>
+        </div>
+      </div>
+      <div id="cartItemsContainer">
+        <!-- Items del carrito -->
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <div class="cart-total-row">
+        <span>Total (IVA incl.)</span>
+        <span id="cartTotal">0,00 €</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn">Tramitar Pedido</button>
+    </div>
+  </aside>
+
+  <!-- SEARCH MODAL -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-container">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:11px; font-weight:800; letter-spacing:0.1em;">BUSCAR EN ANDREA SANZ</span>
+        <button id="closeSearchBtn" style="font-size:18px;">✕</button>
+      </div>
+      <div class="search-input-wrap">
+        <input type="text" id="searchInput" placeholder="ESCRIBE UNA PRENDA (EJ. CAZADORA, BAGGY...)">
+      </div>
+      <div class="trending-tags">
+        <button class="trending-tag" onclick="quickSearch('Cazadora')">Cazadora Efecto Piel</button>
+        <button class="trending-tag" onclick="quickSearch('Baggy')">Jeans Baggy</button>
+        <button class="trending-tag" onclick="quickSearch('Vestido')">Vestido Corsé</button>
+        <button class="trending-tag" onclick="quickSearch('Botas')">Botas Plataforma</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK VIEW PRODUCT MODAL -->
+  <div class="modal-center" id="quickViewModal">
+    <div class="modal-img">
+      <img id="modalImg" src="" alt="">
+    </div>
+    <div class="modal-details">
+      <button class="modal-close" id="closeQuickView">✕</button>
+      <div>
+        <span id="modalCategory" style="font-size:10px; font-weight:700; text-transform:uppercase; color:#767676; letter-spacing:0.1em;"></span>
+        <h3 id="modalTitle" style="font-size:20px; font-weight:800; text-transform:uppercase; margin:6px 0;"></h3>
+        <p id="modalPrice" style="font-size:16px; font-weight:700; margin-bottom:16px;"></p>
+        <p id="modalDesc" style="font-size:13px; color:#555; line-height:1.5; margin-bottom:20px;"></p>
+        <span style="font-size:11px; font-weight:700; text-transform:uppercase;">Selecciona talla:</span>
+        <div class="modal-sizes" id="modalSizes">
+          <button class="modal-size-pill" data-size="XS">XS</button>
+          <button class="modal-size-pill selected" data-size="S">S</button>
+          <button class="modal-size-pill" data-size="M">M</button>
+          <button class="modal-size-pill" data-size="L">L</button>
+        </div>
+      </div>
+      <button class="checkout-btn" id="modalAddBtn">Añadir a la cesta</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Artículo añadido a tu cesta</div>
+
+  <script>
+    // PRODUCT DATA
+    const products = [
+      {
+        id: 1,
+        name: "Cazadora biker efecto piel oversize",
+        price: 49.99,
+        category: "abrigos",
+        badge: "NEW",
+        colors: ["#000000", "#4a2c2a"],
+        img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80",
+        desc: "Cazadora estilo biker de corte amplio confeccionada en tejido efecto piel con solapas y cremalleras metálicas."
+      },
+      {
+        id: 2,
+        name: "Jeans baggy tiro medio lavado ácido",
+        price: 35.99,
+        category: "denim",
+        badge: "TOP VENTAS",
+        colors: ["#3b5998", "#1c1c1c"],
+        img: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80",
+        desc: "Vaquero de pernera ultra ancha con diseño de cinco bolsillos y acabado lavado vintage."
+      },
+      {
+        id: 3,
+        name: "Top corsé asimétrico tejido rib",
+        price: 19.99,
+        category: "tops",
+        badge: "NEW",
+        colors: ["#000000", "#ffffff", "#8d0801"],
+        img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80",
+        desc: "Top ajustado con escote asimétrico y costuras estructuradas estilo corsetería urbana."
+      },
+      {
+        id: 4,
+        name: "Vestido mini drapeado efecto satinado",
+        price: 29.99,
+        category: "vestidos",
+        badge: "-20%",
+        promo: true,
+        colors: ["#000000", "#590d22"],
+        img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80",
+        desc: "Vestido corto de tirantes finos con fruncido lateral y caída fluida."
+      },
+      {
+        id: 5,
+        name: "Botas altas suela track plataforma",
+        price: 59.99,
+        category: "calzado",
+        badge: "NEW",
+        colors: ["#000000"],
+        img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=80",
+        desc: "Botas de caña alta con suela dentada gruesa y cremallera interior."
+      },
+      {
+        id: 6,
+        name: "Trench largo fluido cinturón",
+        price: 65.99,
+        category: "abrigos",
+        badge: "EDITORIAL",
+        colors: ["#c2b280", "#000000"],
+        img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=80",
+        desc: "Gabardina larga de corte relajado con solapas clásicas y cinturón ajustable a tono."
+      },
+      {
+        id: 7,
+        name: "Pantalón cargo parachute multibolsillos",
+        price: 39.99,
+        category: "denim",
+        badge: "NEW",
+        colors: ["#4b5320", "#111111"],
+        img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=80",
+        desc: "Pantalón técnico estilo parachute con bajos ajustables y bolsillos laterales con solapa."
+      },
+      {
+        id: 8,
+        name: "Camiseta cropped gráfico Andrea Sanz",
+        price: 15.99,
+        category: "tops",
+        badge: "LIMITED",
+        colors: ["#ffffff", "#111111"],
+        img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
+        desc: "Camiseta corta 100% algodón con estampado tipográfico exclusivo Andrea Sanz Studio."
+      }
+    ];
+
+    // STATE
+    let currentCategory = 'all';
+    let currentSort = 'featured';
+    let searchQuery = '';
+    let cart = [];
+    let wishlist = new Set();
+    let activeModalProduct = null;
+    let selectedModalSize = 'S';
+
+    // DOM ELEMENTS
+    const header = document.getElementById('mainHeader');
+    const productGrid = document.getElementById('productGrid');
+    const productCount = document.getElementById('productCount');
+    const sortSelect = document.getElementById('sortSelect');
+    const backdrop = document.getElementById('backdrop');
+    const menuDrawer = document.getElementById('menuDrawer');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const searchModal = document.getElementById('searchModal');
+    const quickViewModal = document.getElementById('quickViewModal');
+
+    // SCROLL HEADER EFFECT
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // FORMAT CURRENCY
+    function formatPrice(num) {
+      return num.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    // SHOW TOAST
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    // RENDER PRODUCTS
+    function renderProducts() {
+      let filtered = products.filter(p => {
+        const matchCat = currentCategory === 'all' || p.category === currentCategory;
+        const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchCat && matchSearch;
+      });
+
+      if (currentSort === 'price-asc') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (currentSort === 'price-desc') {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+
+      productCount.textContent = `Mostrando ${filtered.length} artículo${filtered.length !== 1 ? 's' : ''}`;
+
+      if (filtered.length === 0) {
+        productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 48px 0; color:#767676; font-size:13px; text-transform:uppercase;">No se encontraron prendas con ese criterio.</p>`;
+        return;
+      }
+
+      productGrid.innerHTML = filtered.map(p => `
+        <article class="product-card">
+          <div class="product-img-wrap">
+            ${p.badge ? `<span class="product-badge ${p.promo ? 'promo' : ''}">${p.badge}</span>` : ''}
+            <button class="wishlist-btn ${wishlist.has(p.id) ? 'active' : ''}" onclick="toggleWishlist(${p.id})" aria-label="Guardar en favoritos">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <img src="${p.img}" alt="${p.name}" onclick="openQuickView(${p.id})" style="cursor:pointer;">
+            <div class="quick-sizes">
+              <span class="quick-sizes-label">Añadir talla rápida</span>
+              <div class="size-options">
+                ${['XS', 'S', 'M', 'L'].map(size => `
+                  <button class="size-btn" onclick="addToCart(${p.id}, '${size}')">${size}</button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="product-meta" onclick="openQuickView(${p.id})">
+            <h3 class="product-name">${p.name}</h3>
+            <span class="product-price">${formatPrice(p.price)}</span>
+          </div>
+          <div class="product-colors">
+            ${p.colors.map(c => `<span class="color-dot" style="background:${c};"></span>`).join('')}
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // FILTER BY CATEGORY
+    function filterByCategory(cat) {
+      currentCategory = cat;
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.category === cat);
+      });
+      renderProducts();
+    }
+
+    document.querySelectorAll('.cat-pill').forEach(btn => {
+      btn.addEventListener('click', () => filterByCategory(btn.dataset.category));
+    });
+
+    sortSelect.addEventListener('change', (e) => {
+      currentSort = e.target.value;
+      renderProducts();
+    });
+
+    // WISHLIST
+    function toggleWishlist(id) {
+      if (wishlist.has(id)) {
+        wishlist.delete(id);
+        showToast('Eliminado de favoritos');
+      } else {
+        wishlist.add(id);
+        showToast('Guardado en favoritos');
+      }
+      document.getElementById('wishCount').textContent = wishlist.size;
+      renderProducts();
+    }
+
+    // CART LOGIC
+    function addToCart(productId, size) {
+      const product = products.find(p => p.id === productId);
+      const existing = cart.find(item => item.id === productId && item.size === size);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, size, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`Añadido: ${product.name} (${size})`);
+    }
+
+    function changeQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+      const totalPrice = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+      document.getElementById('cartCount').textContent = totalQty;
+      document.getElementById('drawerCartCount').textContent = totalQty;
+      document.getElementById('cartTotal').textContent = formatPrice(totalPrice);
+
+      // Free shipping bar (49.99)
+      const threshold = 49.99;
+      const pct = Math.min((totalPrice / threshold) * 100, 100);
+      document.getElementById('shippingProgress').style.width = pct + '%';
+      if (totalPrice >= threshold) {
+        document.getElementById('shippingText').textContent = '¡Tienes ENVÍO ESTÁNDAR GRATUITO!';
+      } else {
+        const diff = threshold - totalPrice;
+        document.getElementById('shippingText').textContent = `Añade ${formatPrice(diff)} más para envío gratuito`;
+      }
+
+      const container = document.getElementById('cartItemsContainer');
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:#767676; font-size:12px; margin-top:48px; text-transform:uppercase;">Tu cesta está vacía</p>`;
+        return;
+      }
+
+      container.innerHTML = cart.map((item, idx) => `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.name}">
+          <div class="cart-item-info">
+            <div>
+              <div class="cart-item-title">${item.name}</div>
+              <div class="cart-item-meta">Talla: ${item.size}</div>
+            </div>
+            <div class="cart-item-bottom">
+              <div class="qty-controls">
+                <button onclick="changeQty(${idx}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button onclick="changeQty(${idx}, 1)">+</button>
+              </div>
+              <span style="font-size:12px; font-weight:700;">${formatPrice(item.price * item.qty)}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // DRAWERS & MODALS CONTROLS
+    function closeAllDrawers() {
+      backdrop.classList.remove('open');
+      menuDrawer.classList.remove('open');
+      cartDrawer.classList.remove('open');
+      searchModal.classList.remove('open');
+      quickViewModal.classList.remove('open');
+    }
+
+    document.getElementById('openMenuBtn').addEventListener('click', () => {
+      closeAllDrawers();
+      backdrop.classList.add('open');
+      menuDrawer.classList.add('open');
+    });
+
+    document.getElementById('openCartBtn').addEventListener('click', () => {
+      closeAllDrawers();
+      backdrop.classList.add('open');
+      cartDrawer.classList.add('open');
+    });
+
+    document.getElementById('openSearchBtn').addEventListener('click', () => {
+      closeAllDrawers();
+      backdrop.classList.add('open');
+      searchModal.classList.add('open');
+      setTimeout(() => document.getElementById('searchInput').focus(), 150);
+    });
+
+    document.getElementById('closeMenuBtn').addEventListener('click', closeAllDrawers);
+    document.getElementById('closeCartBtn').addEventListener('click', closeAllDrawers);
+    document.getElementById('closeSearchBtn').addEventListener('click', closeAllDrawers);
+    document.getElementById('closeQuickView').addEventListener('click', closeAllDrawers);
+    backdrop.addEventListener('click', closeAllDrawers);
+
+    // SEARCH FUNCTIONALITY
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById('searchInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        closeAllDrawers();
+        document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    function quickSearch(term) {
+      document.getElementById('searchInput').value = term;
+      searchQuery = term;
+      currentCategory = 'all';
+      renderProducts();
+      closeAllDrawers();
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // QUICK VIEW MODAL
+    function openQuickView(id) {
+      const p = products.find(item => item.id === id);
+      activeModalProduct = p;
+      selectedModalSize = 'S';
+      document.getElementById('modalImg').src = p.img;
+      document.getElementById('modalCategory').textContent = `ANDREA SANZ / ${p.category}`;
+      document.getElementById('modalTitle').textContent = p.name;
+      document.getElementById('modalPrice').textContent = formatPrice(p.price);
+      document.getElementById('modalDesc').textContent = p.desc;
+
+      document.querySelectorAll('.modal-size-pill').forEach(pill => {
+        pill.classList.toggle('selected', pill.dataset.size === 'S');
+      });
+
+      closeAllDrawers();
+      backdrop.classList.add('open');
+      quickViewModal.classList.add('open');
+    }
+
+    document.querySelectorAll('.modal-size-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        selectedModalSize = pill.dataset.size;
+        document.querySelectorAll('.modal-size-pill').forEach(b => b.classList.remove('selected'));
+        pill.classList.add('selected');
+      });
+    });
+
+    document.getElementById('modalAddBtn').addEventListener('click', () => {
+      if (activeModalProduct) {
+        addToCart(activeModalProduct.id, selectedModalSize);
+        closeAllDrawers();
+      }
+    });
+
+    // CHECKOUT & NEWSLETTER
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) {
+        showToast('Tu cesta está vacía');
+        return;
+      }
+      showToast('Procesando pedido en Andrea Sanz...');
+      cart = [];
+      updateCartUI();
+      setTimeout(closeAllDrawers, 800);
+    });
+
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('¡Bienvenido/a al club Andrea Sanz!');
+      e.target.reset();
+    });
+
+    // INIT
+    renderProducts();
+    updateCartUI();
+  </script>
 </body>
 </html>
